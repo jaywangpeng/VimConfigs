@@ -35,19 +35,24 @@ syntax on
 filetype indent plugin on
 filetype plugin on
 set shell=PowerShell
-"set shellcmdflag=-command
 execute pathogen#infect()
 colorscheme solarized
 set background=dark
-set lines=40 columns=80
+set lines=55 columns=162
 set guifont=Courier_New:h11
-cd E:\Documents\
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
 
 "key mappings
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+map <C-n> :NERDTreeToggle<CR>
 
 "syntastic settings
 set statusline+=%#warningmsg#
