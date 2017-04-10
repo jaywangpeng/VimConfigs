@@ -54,6 +54,9 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 map <C-n> :NERDTreeToggle<CR>
 
+"tagbar settings
+nnoremap <F8> :TagbarToggle<CR>
+
 "syntastic settings
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -65,6 +68,3 @@ let g:syntastic_check_on_wq = 0
 
 "ctrlp settings
 set runtimepath^=~/vimfiles/bundle/ctrlp.vim/plugin/ctrlp.vim
-
-"tagbar settings
-nnoremap <F8> :TagbarToggle<CR>
