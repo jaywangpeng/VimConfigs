@@ -1,8 +1,8 @@
+set nocompatible
 syntax on
 filetype indent plugin on
 execute pathogen#infect()
-set nocompatible
-set shell=PowerShell
+set shell=cmd
 
 " GVIM Window settings
 colorscheme solarized
@@ -44,14 +44,11 @@ set nostartofline
 " dialogue asking if you wish to save changed files.
 set confirm
 " Indentation settings for using 4 spaces instead of tabs.
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set smarttab
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab
+
 " Indentation for specific file types
 autocmd BufNewFile,BufRead *.{json,yaml,js,html,css}
-    \setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    \set tabstop=2 softtabstop=2 shiftwidth=2
 
 " Custom file type highlighting
 autocmd BufNewFile,BufRead *.conf set syntax=ps1
@@ -73,6 +70,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['flake8']
 
 " ctrlp settings
 set runtimepath^=~/vimfiles/bundle/ctrlp.vim
