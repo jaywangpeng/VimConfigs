@@ -21,6 +21,10 @@ set cmdheight=1
 set laststatus=2
 set ruler
 set visualbell
+set backspace=indent,eol,start
+set nostartofline
+set confirm
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab
 set colorcolumn=80
 highlight ColorColumn ctermbg=8
 set diffopt=filler,vertical
@@ -48,24 +52,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
-" Allow backspacing over autoindent, line breaks and start of insert action
-set backspace=indent,eol,start
-" Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
-" coming from other editors would expect.
-set nostartofline
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
-set confirm
-" Indentation settings for using 4 spaces instead of tabs.
-set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab
-
 " Indentation for specific file types
 autocmd FileType json,yaml,js,html,css
     \ setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " Custom file type highlighting
-" autocmd BufNewFile,BufRead *.conf set syntax=ps1
+autocmd BufNewFile,BufRead *.conf set syntax=ps1
 
 " key mappings
 nnoremap <C-J> <C-W><C-J>
@@ -80,7 +72,7 @@ nnoremap <F8> :TagbarToggle<CR>
 
 " YouCompleteMe settings
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf = '~\.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 " vim-airline-theme settings
 let g:airline_theme='tomorrow'
@@ -97,14 +89,13 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 let g:ale_linters = {
     \ 'c': ['clang', 'clangtidy'],
     \ 'python': ['flake8', 'pylint']
-    \}
+    \ }
 let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'python': ['autopep8']
-    \}
+    \ }
 
 " Tagbar settings
-let g:tagbar_ctags_bin = 'C:\Windows\ctags.exe'
 let g:tagbar_type_ps1 = {
     \ 'ctagstype' : 'powershell',
     \ 'kinds'     : [
