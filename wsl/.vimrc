@@ -57,7 +57,7 @@ autocmd FileType json,yaml,js,html,css
     \ setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " Custom file type highlighting
-autocmd BufNewFile,BufRead *.conf set syntax=ps1
+" autocmd BufNewFile,BufRead *.conf set syntax=ps1
 
 " key mappings
 nnoremap <C-J> <C-W><C-J>
@@ -89,13 +89,14 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 let g:ale_linters = {
     \ 'c': ['clang', 'clangtidy'],
     \ 'python': ['flake8', 'pylint']
-    \ }
+    \}
 let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'python': ['autopep8']
-    \ }
+    \}
 
 " Tagbar settings
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
 let g:tagbar_type_ps1 = {
     \ 'ctagstype' : 'powershell',
     \ 'kinds'     : [
