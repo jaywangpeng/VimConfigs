@@ -85,6 +85,7 @@ Plug 'valloric/youcompleteme',
     \{ 'do': 'python.exe install.py --msvc 15 --clang-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-repeat'
 call plug#end()
 
 " youcompleteme settings
