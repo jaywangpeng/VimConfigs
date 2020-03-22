@@ -72,8 +72,7 @@ Plug 'dense-analysis/ale'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir':'~\.fzf' }
 Plug 'junegunn/fzf.vim'
-Plug 'lifepillar/vim-solarized8',
-    \{ 'dir': '~\vimfiles\pack\themes\opt\solarized8' }
+Plug 'lifepillar/vim-solarized8', { 'dir': '~\vimfiles\pack\themes\opt\solarized8' }
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'PProvost/vim-ps1'
@@ -81,8 +80,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'valloric/youcompleteme',
-    \{ 'do': 'python.exe install.py --msvc 15 --clang-completer' }
+Plug 'valloric/youcompleteme', { 'do': 'python.exe install.py --msvc 15 --clangd-completer --go-completer --java-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-repeat'
