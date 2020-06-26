@@ -4,7 +4,7 @@ syntax on
 
 " GVIM Window settings
 set encoding=utf-8
-set lines=200 columns=170
+set lines=200 columns=180
 set guifont=Consolas:h11
 set guioptions-=m
 set guioptions-=T
@@ -79,7 +79,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'valloric/youcompleteme', { 'do': 'python.exe install.py --msvc 15 --clangd-completer' }
+Plug 'valloric/youcompleteme', { 'do': 'python.exe install.py --clangd-completer' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-repeat'
