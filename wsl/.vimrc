@@ -36,7 +36,6 @@ call plug#begin()
 Plug 'dense-analysis/ale'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-Plug 'junegunn/fzf.vim'
 Plug 'lifepillar/vim-solarized8',
     \{ 'dir': '~/.vim/pack/themes/opt/solarized8' }
 Plug 'luochen1990/rainbow'

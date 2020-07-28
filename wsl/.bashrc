@@ -69,14 +69,14 @@ function k8() {
 function gi() {
     if [[ -n $(git status 2>/dev/null) ]]; then
         local result=$(git rev-parse --abbrev-ref HEAD)
-        echo "[$result]"
+        echo "$result:"
     fi
 }
 
 if [ "$color_prompt" = yes ]; then
-    PS1='$(date +%d/%m\ %T)\[\033[01;36m\]$(k8)\[\033[01;33m\]$(gi)${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='\t${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[33m\]$(gi)\[\033[40m\]\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot$(k8)$(gi):+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\t${debian_chroot:+($debian_chroot)}\u@\h:$(gi)\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -108,7 +108,6 @@ fi
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
-alias kc=kubectl
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
