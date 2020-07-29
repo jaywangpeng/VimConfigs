@@ -69,12 +69,14 @@ function k8() {
 function gi() {
     if [[ -n $(git status 2>/dev/null) ]]; then
         local result=$(git rev-parse --abbrev-ref HEAD)
-        echo "[$result]"
+        echo ":$result:"
+    else
+        echo ":"
     fi
 }
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\t${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]\[\033[33m\]$(gi)\[\033[01;36m\]\w\[\033[00m\]\$ '
+    PS1='\t${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[33m\]$(gi)\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='\t${debian_chroot:+($debian_chroot)}\u@\h:$(gi)\w\$ '
 fi
