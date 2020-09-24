@@ -1,0 +1,118 @@
+set nocompatible
+filetype indent plugin on
+syntax on
+
+" General settings
+set nowrap
+set foldmethod=indent
+set foldnestmax=99
+set splitbelow
+set splitright
+set relativenumber
+set number
+set hidden
+set wildmenu
+set showcmd
+set hlsearch
+set incsearch
+set autoindent
+set cmdheight=1
+set laststatus=2
+set ruler
+set visualbell
+set colorcolumn=80
+set diffopt=filler,vertical
+set background=dark
+colorscheme solarized8
+
+" Allow backspacing over autoindent, line breaks and start of insert action
+set backspace=indent,eol,start
+" Stop certain movements from always going to the first character of a line.
+" While this behaviour deviates from that of Vi, it does what most users
+" coming from other editors would expect.
+set nostartofline
+" Instead of failing a command because of unsaved changes, instead raise a
+" dialogue asking if you wish to save changed files.
+set confirm
+" Indentation settings for using 4 spaces instead of tabs.
+set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab
+
+" Indentation for specific file types
+autocmd FileType json,yaml,js,html,css,tf
+            \ setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
+" Custom file type highlighting
+autocmd BufNewFile,BufRead *.conf set syntax=ps1
+autocmd BufNewFile,BufRead *.groovy set syntax=java
+
+" key mappings
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+map <F1> :ALEInfo<CR>
+nnoremap <F2> :noh<CR>
+nnoremap <F3> :FZF<CR>
+map <F4> :NERDTreeToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
+
+" vim-plug
+call plug#begin()
+Plug 'dense-analysis/ale'
+Plug 'godlygeek/tabular'
+Plug 'junegunn/fzf'
+Plug 'lifepillar/vim-solarized8', { 'dir': '~/.vim/pack/themes/opt/solarized8' }
+Plug 'luochen1990/rainbow'
+Plug 'majutsushi/tagbar'
+Plug 'PProvost/vim-ps1'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'valloric/youcompleteme', { 'do': 'python3 install.py --all' }
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-repeat'
+Plug 'hashivim/vim-terraform'
+Plug 'juliosueiras/vim-terraform-completion'
+Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'modille/groovy.vim'
+call plug#end()
+
+" youcompleteme settings
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" vim-airline-theme settings
+let g:airline_theme='tomorrow'
+
+" Rainbow settings
+let g:rainbow_active = 1
+
+" fzf settings
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+    \ | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" ALE settings
+let g:ale_linters = {
+    \ 'c': ['clang', 'clangtidy'],
+    \ 'python': ['flake8', 'pylint']
+    \}
+let g:ale_fixers = {
+    \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \ 'python': ['autopep8']
+    \}
+
+" Tagbar settings
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_type_ps1 = {
+    \ 'ctagstype' : 'powershell',
+    \ 'kinds'     : [
+        \ 'f:function',
+        \ 'i:filter',
+        \ 'a:alias'
+    \ ]
+    \ }
