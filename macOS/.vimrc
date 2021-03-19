@@ -22,20 +22,16 @@ set ruler
 set visualbell
 set colorcolumn=80
 set diffopt=filler,vertical
-set background=dark
-colorscheme solarized8
-
-" Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
-" Stop certain movements from always going to the first character of a line.
-" While this behaviour deviates from that of Vi, it does what most users
-" coming from other editors would expect.
 set nostartofline
-" Instead of failing a command because of unsaved changes, instead raise a
-" dialogue asking if you wish to save changed files.
 set confirm
-" Indentation settings for using 4 spaces instead of tabs.
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab
+set lines=200 columns=400
+
+" Font and theme
+set background=dark
+set guifont=Consolas:h14
+colorscheme solarized
 
 " Indentation for specific file types
 autocmd FileType json,yaml,js,html,css,tf
@@ -44,24 +40,29 @@ autocmd FileType json,yaml,js,html,css,tf
 " Custom file type highlighting
 autocmd BufNewFile,BufRead *.conf set syntax=ps1
 autocmd BufNewFile,BufRead *.groovy set syntax=java
+autocmd BufNewFile,BufRead *.PublishSettings set syntax=xml
 
 " key mappings
+nnoremap <Space> <Nop>
+let mapleader=" "
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-map <F1> :ALEInfo<CR>
+nnoremap <silent> <leader>j :ALENext<cr>
+nnoremap <silent> <leader>k :ALEPrevious<cr>
+nnoremap <F1> :ALEInfo<CR>
 nnoremap <F2> :noh<CR>
 nnoremap <F3> :FZF<CR>
-map <F4> :NERDTreeToggle<CR>
+nnoremap <F4> :NERDTreeToggle<CR>
 nnoremap <F8> :TagbarToggle<CR>
+nnoremap <F11> :ls<cr>
 
 " vim-plug
 call plug#begin()
 Plug 'dense-analysis/ale'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf'
-Plug 'lifepillar/vim-solarized8', { 'dir': '~/.vim/pack/themes/opt/solarized8' }
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
 Plug 'PProvost/vim-ps1'
@@ -76,7 +77,9 @@ Plug 'tpope/vim-repeat'
 Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'modille/groovy.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/groovy.vim'
 call plug#end()
 
 " youcompleteme settings
@@ -92,6 +95,7 @@ let g:airline_theme='tomorrow'
 let g:rainbow_active = 1
 
 " fzf settings
+set rtp+=/usr/local/opt/fzf
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
     \ | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
@@ -116,3 +120,12 @@ let g:tagbar_type_ps1 = {
         \ 'a:alias'
     \ ]
     \ }
+
+" bash-lsp settings
+if executable('bash-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'bash-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+        \ 'allowlist': ['sh'],
+        \ })
+endif

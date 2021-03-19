@@ -106,9 +106,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 ######## My Configs ########
-alias ll="ls -alhF"
+alias ll="ls -alhtrFp"
 alias vim="/usr/local/bin/vim"
-export EDITOR="usr/local/bin/vim"
+export EDITOR="/usr/local/bin/vim"
 alias tf="terraform"
 
 # fzf
@@ -125,14 +125,23 @@ source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 # functions
 function kcaws() {
     if [[ -z $1 ]]; then
-        account=""
+        account="elmolearning"
     else
         account=$1
     fi
     saml2aws login -a $account --profile=$account --skip-prompt
     export AWS_DEFAULT_PROFILE=$account
-    env | grep AWS_DEFAULT_PROFILE
+    export AWS_PROFILE=$account
+    env | egrep 'AWS_(DEFAULT_)?PROFILE'
 }
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+source /usr/local/etc/bash_completion.d/az
+
+# Added by serverless binary installer
+export PATH="$HOME/.serverless/bin:$PATH"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
