@@ -77,6 +77,9 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 " vim-airline-theme settings
 let g:airline_theme='tomorrow'
 
+" NERDTree
+let NERDTreeShowHidden=1
+
 " Rainbow settings
 let g:rainbow_active = 1
 
