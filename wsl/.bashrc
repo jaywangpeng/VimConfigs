@@ -56,27 +56,31 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-function okta() {
-    cp /mnt/c/Users/jay.wang/.aws/* ~/.aws/
-    chmod 600 ~/.aws/*
-}
+function k8 { echo "[$(kubectl config current-context)]"; }
 
-function k8() {
-    local result=$(kubectl config current-context)
-    echo "[$result]"
-}
-
-function gi() {
+function gi {
     if [[ -n $(git status 2>/dev/null) ]]; then
         local result=$(git rev-parse --abbrev-ref HEAD)
-        echo "[$result]"
+        echo ":$result:"
+    else
+        echo ":"
     fi
 }
 
+function okta() {
+    if [[ -z $1 ]]; then
+        echo 'Missing Okta IDPAccount name'
+        return 1
+    fi
+    saml2aws login -a $1 --profile=$1
+    export AWS_DEFAULT_PROFILE=$1
+    env | grep AWS_DEFAULT_PROFILE
+}
+
 if [ "$color_prompt" = yes ]; then
-    PS1='$(date +%d/%m\ %T)\[\033[01;36m\]$(k8)\[\033[01;33m\]$(gi)${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='\t${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[33m\]$(gi)\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='${debian_chroot$(k8)$(gi):+($debian_chroot)}\u@\h:\w\$ '
+    PS1='\t${debian_chroot:+($debian_chroot)}\u@\h:$(gi)\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -108,7 +112,6 @@ fi
 alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
-alias kc=kubectl
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -133,3 +136,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
