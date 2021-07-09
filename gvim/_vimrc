@@ -94,6 +94,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " vim-airline-theme settings
 let g:airline_theme='tomorrow'
 
+" NERDTree
+let NERDTreeShowHidden=1
+
 " Rainbow settings
 let g:rainbow_active = 1
 
