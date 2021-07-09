@@ -20,18 +20,21 @@ set cmdheight=1
 set laststatus=2
 set ruler
 set visualbell
-set colorcolumn=80
 set diffopt=filler,vertical
 set backspace=indent,eol,start
 set nostartofline
 set confirm
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab smarttab
 set lines=200 columns=400
+set colorcolumn=80
+highlight ColorColumn ctermbg=lightgrey
 
 " Font and theme
 set background=dark
 set guifont=Consolas:h14
-colorscheme solarized
+if has("gui_running")
+    colorscheme solarized
+endif
 
 " Indentation for specific file types
 autocmd FileType json,yaml,js,html,css,tf
@@ -63,8 +66,10 @@ call plug#begin()
 Plug 'dense-analysis/ale'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'luochen1990/rainbow'
 Plug 'majutsushi/tagbar'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'PProvost/vim-ps1'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -80,7 +85,12 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/groovy.vim'
+Plug 'fatih/vim-go'
+Plug 'yggdroot/indentline'
 call plug#end()
+
+" tagbar settings
+let g:tagbar_autofocus = 1
 
 " youcompleteme settings
 let g:ycm_confirm_extra_conf = 0
@@ -95,10 +105,15 @@ let g:airline_theme='tomorrow'
 let g:rainbow_active = 1
 
 " fzf settings
-set rtp+=/usr/local/opt/fzf
+set runtimepath+=/usr/local/opt/fzf
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
     \ | autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" CtrlP settings
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " ALE settings
 let g:ale_linters = {
@@ -129,3 +144,6 @@ if executable('bash-language-server')
         \ 'allowlist': ['sh'],
         \ })
 endif
+
+" indentLine settings
+let g:indentLine_concealcursor = ''
