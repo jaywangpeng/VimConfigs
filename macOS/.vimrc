@@ -46,8 +46,10 @@ autocmd BufNewFile,BufRead *.groovy set syntax=java
 autocmd BufNewFile,BufRead *.PublishSettings set syntax=xml
 
 " key mappings
+let @+ = expand('%')
+nmap <Space>cp :let @+ = expand('%')<cr>
 nnoremap <Space> <Nop>
-let mapleader=" "
+let mapleader=' '
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -87,6 +89,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/groovy.vim'
 Plug 'fatih/vim-go'
 Plug 'yggdroot/indentline'
+Plug 'puremourning/vimspector'
 call plug#end()
 
 " tagbar settings
@@ -118,12 +121,21 @@ let g:ctrlp_cmd = 'CtrlP'
 " ALE settings
 let g:ale_linters = {
     \ 'c': ['clang', 'clangtidy'],
-    \ 'python': ['flake8', 'pylint']
+    \ 'python': ['flake8', 'pylint'],
+    \ 'go': ['gopls'],
+    \ 'groovy': ['npm-groovy-lint'],
+    \ 'dockerfile': ['hadolint'],
     \}
 let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'python': ['autopep8']
     \}
+
+" vim-language-server
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
 
 " Tagbar settings
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
